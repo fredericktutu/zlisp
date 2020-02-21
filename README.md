@@ -1,2 +1,2 @@
 # zlisp
-Scheme Interpreter running on Stack VM
+Scheme Compiler running on Stack VM
