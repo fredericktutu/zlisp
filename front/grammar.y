@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "sexp.h"
-
+#include "codegen.h"
 #define YYDEBUG 1
 #define YYSTYPE SExpr*
 %}
@@ -13,7 +13,11 @@
 program:
     expression
     {
+		printf("print AST:\n");
 		print_sexpr($1);
+
+		printf("\ngenerate vm code to file\n");
+		write_once(codegen($1),"test_case.zv");
     }
     ;
 expression:

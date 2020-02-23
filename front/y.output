@@ -1,0 +1,124 @@
+   0  $accept : program $end
+
+   1  program : expression
+
+   2  expression : NUMBER
+   3             | ID
+   4             | LP RP
+   5             | LP expression_list RP
+   6             | QUO expression
+
+   7  expression_list : expression
+   8                  | expression expression_list
+
+state 0
+	$accept : . program $end  (0)
+
+	LP  shift 1
+	QUO  shift 2
+	NUMBER  shift 3
+	ID  shift 4
+	.  error
+
+	program  goto 5
+	expression  goto 6
+
+
+state 1
+	expression : LP . RP  (4)
+	expression : LP . expression_list RP  (5)
+
+	LP  shift 1
+	RP  shift 7
+	QUO  shift 2
+	NUMBER  shift 3
+	ID  shift 4
+	.  error
+
+	expression  goto 8
+	expression_list  goto 9
+
+
+state 2
+	expression : QUO . expression  (6)
+
+	LP  shift 1
+	QUO  shift 2
+	NUMBER  shift 3
+	ID  shift 4
+	.  error
+
+	expression  goto 10
+
+
+state 3
+	expression : NUMBER .  (2)
+
+	.  reduce 2
+
+
+state 4
+	expression : ID .  (3)
+
+	.  reduce 3
+
+
+state 5
+	$accept : program . $end  (0)
+
+	$end  accept
+
+
+state 6
+	program : expression .  (1)
+
+	.  reduce 1
+
+
+state 7
+	expression : LP RP .  (4)
+
+	.  reduce 4
+
+
+state 8
+	expression_list : expression .  (7)
+	expression_list : expression . expression_list  (8)
+
+	LP  shift 1
+	QUO  shift 2
+	NUMBER  shift 3
+	ID  shift 4
+	RP  reduce 7
+
+	expression  goto 8
+	expression_list  goto 11
+
+
+state 9
+	expression : LP expression_list . RP  (5)
+
+	RP  shift 12
+	.  error
+
+
+state 10
+	expression : QUO expression .  (6)
+
+	.  reduce 6
+
+
+state 11
+	expression_list : expression expression_list .  (8)
+
+	.  reduce 8
+
+
+state 12
+	expression : LP expression_list RP .  (5)
+
+	.  reduce 5
+
+
+7 terminals, 4 nonterminals
+9 grammar rules, 13 states

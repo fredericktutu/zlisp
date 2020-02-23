@@ -1,0 +1,10 @@
+pushi define
+check
+pushi x
+pushi add
+check
+pushc 1
+pushc 2
+dol 3
+dol 3
+pop

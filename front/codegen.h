@@ -7,12 +7,9 @@ dol x
 pop
 */
 
-char* PUSHI = "pushi";
-char* PUSHC = "pushc";
-char* PUSHN = "pushn";
-char* CHECK = "check";
-char* DOL   = "dol";
-char* POP   = "pop";
-char* SP    = " ";
-char* NIL   = "nil";
-char* FEED    = "\n";
+
+
+int write_once(char* code, char *path);
+char* codegen(SExpr *exp);
+char* gen_exp(SExpr *exp);
+char* gen_current(SExpr *exp);

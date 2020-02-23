@@ -1,7 +1,7 @@
 CC = gcc
 
 all: lisp
-COMOBJ = y.tab.o lex.yy.o parse.o emalloc.o
+COMOBJ = y.tab.o lex.yy.o parse.o codegen.o
 
 #----------------------------------------
 .c.o:
@@ -26,5 +26,6 @@ clean:
 #
 lex.yy.o: lex.yy.c sexp.h y.tab.h
 parse.o:   sexp.h parse.c
-y.tab.o:  y.tab.c sexp.h
-emalloc.o: emalloc.c
+y.tab.o:  y.tab.c sexp.h codegen.h
+codegen.o: codegen.c codegen.h
+
