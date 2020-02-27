@@ -1,3 +1,4 @@
+#include "machine.h"
 /*
  * Item Part 
  * defined in listexec.c
@@ -11,7 +12,13 @@ typedef enum {
 	ITEMTYPE_NIL,
 	ITEMTYPE_BAD,
 	ITEMTYPE_BOOL,
+
+	ITEMTYPE_MODE,
+	ITEMTYPE_INNATE,
+	ITEMTYPE_LAMBDA
 }ItemType;
+
+
 
 typedef struct ListContainer ListContainer;
 
@@ -23,6 +30,8 @@ typedef struct Item_{
 		ListContainer *value_list;
 		int value_bool;
 		char *value_bad;
+		Mode *value_mode;
+		InnateFunction *value_innate;
 	} value;
 }Item;
 
@@ -30,6 +39,11 @@ struct ListContainer {
 	Item *head; //the type of head could be all the types defined above
 	Item *next; //the type of next should be ITEMTYPE_LIST OR ITEMTYPE_NIL
 };
+
+typedef struct InnateFunction {
+	ModeType mode;
+	int total_stage;
+}InnateFunction;
 
 
 Item *make_empty_item();

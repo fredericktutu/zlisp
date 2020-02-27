@@ -52,12 +52,18 @@ Item *stack_pop(Stack *s) {
 }
 
 
+
+
 Item* get_nth_from_stack(Stack *s, int n){
 	if(s -> top < n) {
 		return NULL;
 	} else {
 		return s -> stack[s -> top - n];
 	}
+}
+
+int	stack_is_empty(Stack *s) {
+	return s -> top == -1 ? 1 : 0;
 }
 
 

@@ -16,6 +16,10 @@ Item *make_bad_item(char *c) {
 	return tmp;
 }
 
+int bad(Item *it) {
+	return (it -> type == ITEMTYPE_BAD) ? 1 : 0;
+}
+
 Item *make_bool_item(int x) {
 	Item *tmp = make_empty_item();
 	tmp -> type = ITEMTYPE_BOOL;
@@ -45,7 +49,16 @@ Item *make_const_item(int num){
 	it -> type = ITEMTYPE_CONST;
 	it -> value.value_const = num;
 	return it; 
-	
+}
+
+Item *make_innate_item(ModeType innate_mode, int total_stage) {
+	InnateFunction *infunc = malloc(sizeof(InnateFunction));
+	infunc -> mode = innate_mode;
+	infunc -> total_stage = total_stage;
+	Item *it = make_empty_item();
+	it -> type = ITEMTYPE_INNATE;
+	it -> value.value_innate = infunc;
+	return it;
 }
 
 ListContainer *make_empty_list_container() {
